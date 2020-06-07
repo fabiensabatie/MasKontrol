@@ -1,0 +1,31 @@
+{
+    "name": "maskontrol",
+    "version": "2.0.0",
+    "description": "One mask to control them all",
+    "main": "src/server.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "export ENV=development",
+        "prod": "export ENV=production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fabiensabatie/MasKontrol.git"
+    },
+    "author": "PandaSuprême",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/fabiensabatie/MasKontrol/issues"
+    },
+    "homepage": "https://github.com/fabiensabatie/MasKontrol#readme",
+    "dependencies": {
+        "@types/cors": "^2.8.6",
+        "@types/dotenv": "^8.2.0",
+        "@types/express": "^4.17.6",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "ts-node": "^8.10.2"
+    }
+}

@@ -7,13 +7,13 @@ The project is divided into three parts :
 - **The React front-end**, that allows me to map the LED strips, and provides a user-friendly interface for creating sequences, sequence lists, handle sequences loops, manage the mask luminosity settings, and more.
 
 ---------------------------------------------
-In order to make the mask fully wearable, I use a RaspberryPi 4 that emits its own WiFi newtork, runs both servers and exposes the React front-end so that the mask can be controlled from any device connected to the Pi.
+In order to make the mask fully wearable (in other words, able to work without a laptop), I use a RaspberryPi 4 that emits its own WiFi newtork, runs both servers and exposes the React front-end so that the mask can be controlled from any device connected to the Pi.
 
 ### The hardware
 
 ![image](https://i.giphy.com/j654Uetox6m3o1kGhG.gif)
 
-The mask is built with SK6812 leds strips, for a total of 864 leds, and is powered by height 18660 batteries.
+The mask is built with SK6812 leds strips, for a total of 822 leds, and is powered by height 18660 batteries.
 
 ### Special thanks
 
