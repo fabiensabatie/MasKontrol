@@ -3,10 +3,17 @@ import { Request, Response, NextFunction } from 'express';
 export namespace Server {
 	export type RouteCallback = (req: Request, res: Response, next: NextFunction) => Promise<any>;
 
-	export type RouteMap = { [methodName: string]: RouteCallback };
+	export type RouteMap = { [functionName: string]: RouteCallback };
 
+	export type RoutesMap = {
+		[method: string]: {
+			[url: string]: RouteCallback;
+		};
+	};
+
+	export type Methods = 'POST' | 'GET' | 'PUT' | 'DELETE';
 	export interface Route {
-		method: 'POST' | 'GET' | 'PUT' | 'DELETE';
+		method: Methods;
 		url: string;
 		callback: RouteCallback;
 	}
@@ -16,8 +23,8 @@ export namespace Server {
 	};
 
 	export type CustomResponse = {
-		data: any;
-		errors: any;
+		data?: any;
+		errors?: any;
 	};
 
 	export type Options = {

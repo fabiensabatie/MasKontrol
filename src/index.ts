@@ -1,5 +1,5 @@
 import * as Dotenv from 'dotenv';
-import { WebServer } from './server';
+import { WebServer } from './services/server';
 import Routes from './routes';
 
 Dotenv.config(); // Fetches the .env file
