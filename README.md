@@ -11,7 +11,7 @@ In order to make the mask fully wearable, I use a RaspberryPi 4 that emits its o
 
 ### The hardware
 
-![image](https://media.giphy.com/media/j654Uetox6m3o1kGhG/source.gif)
+![image](https://i.giphy.com/j654Uetox6m3o1kGhG.gif)
 
 The mask is built with SK6812 leds strips, for a total of 864 leds, and is powered by height 18660 batteries.
 
