@@ -4,7 +4,7 @@ import Cors from 'cors';
 import BodyParser from 'body-parser';
 import HTTP from 'http';
 import { Server } from '../types';
-import Logger from './logger';
+import Logger from './utils/logger';
 
 export class CustomResponse {
 	private _data: any = {};

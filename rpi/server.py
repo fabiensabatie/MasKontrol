@@ -22,9 +22,9 @@ def init():
 	if request.is_json == False:
 		return json.dumps({"success" : False, "error": "Please provide a json object in the request"})
 	content = request.get_json()
-	if content['GPIO'] and content['LED_COUNT'] and content['MAX_BRIGHTNESS']:
+	if content['maxBrightness']:
 		try:
-			mask.init(content['GPIO'], content['LED_COUNT'], content['MAX_BRIGHTNESS'])
+			mask.init(content['maxBrightness'])
 			return json.dumps({ "success": True })
 		except:
 			return json.dumps({"success": False, "error" : "Failed while trying to execute init"})
@@ -37,7 +37,7 @@ def init():
 
 @app.route('/ping')
 def ping():
-	return json.dumps({ "pong": True })
+	return json.dumps({ "pong": True, 'success' : True })
 
 
 ################################################################################

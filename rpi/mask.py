@@ -15,7 +15,7 @@ LED_COUNT		= 0		 # How many LEDs to light.
 LED_FREQ_HZ 	= 800000	# Frequency of the LED signal.  Should be 800khz or 400khz.
 LED_DMA_NUM		= 10		# DMA channel to use, can be 0-14.
 LED_GPIO		= [18, 13]		# GPIO connected to the LED signal line.  Must support PWM!
-LED_BRIGHTNESS	= 0		# Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS	= 10		# Set to 0 for darkest and 255 for brightest
 LED_INVERT		= 0		# Set to 1 to invert the LED signal, good if using NPN transistor as a 3.3V->5V level converter.  Keep at 0 for a normal/non-inverted signal.
 LED_STRIP		= ws.SK6812W_STRIP
 LEDS            = False
@@ -166,8 +166,7 @@ def render():
 ################################## MASK BOOTUP #################################
 ################################################################################
 
-def init(rPin = 18, ledCount = 822, maxBrightness = 30):
-	print('Initialized ✓')
+def init(maxBrightness = 10):
 	global LED_COUNT
 	global LED_BRIGHTNESS
 	global LED_GPIO
@@ -223,6 +222,8 @@ def init(rPin = 18, ledCount = 822, maxBrightness = 30):
 
 	fill({"R" : 0, "G" : 0, "B": 0})
 	render()
+	print('Initialized ✓')
+
 
 def setKill():
 	global KILL

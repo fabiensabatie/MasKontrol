@@ -1,3 +1,4 @@
 import Sequences from './sequences';
+import Converter from './converter';
 
-export default [Sequences].flat();
+export default [Sequences, Converter].flat();

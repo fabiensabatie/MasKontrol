@@ -1,4 +1,5 @@
 import { Server } from './server';
-import { Sequence } from './sequences';
+import { SequenceOptions } from './sequences';
+import { Mask } from './mask';
 
-export { Server, Sequence };
+export { Server, SequenceOptions, Mask };
