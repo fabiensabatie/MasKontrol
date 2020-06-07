@@ -53,6 +53,13 @@ The server exposes the following routes :
 | GET | /thumbnails | Serves the sequences thumbnails for the front-end to display | **url** (*string*), **name** (*string, optionnal*)
 
 
+To run the server :
+
+```
+npm run dev # For development mode
+npm run prod # For production mode
+```
+
 ## The Python server
 
 The server plays two roles, handle sequences and sequence lists, and display them on the Mask using the [rpi_ws281x](https://github.com/jgarff/rpi_ws281x) library.
@@ -70,6 +77,12 @@ The server exposes the following routes using Flask :
 | GET | /getList | Fetches a specific list | **name** (*string - the list name*)
 | POST | /playSequences | Plays a sequence | **sequence** (*string - the sequence name*), **meta** (*object - the metadata*) 
 
+To run the server :
+
+```
+sudo python3 server.py
+```
+
 #### The meta-data object :
 Allows me to over-ride some of the parameters within the sequence file, and provide information about the way I want to play it. It is a simple JSON object with the following fields :
 
@@ -86,6 +99,13 @@ A friendly user-friendly interface that interacts with the two previously descri
 
 The front-end also allows me to convert any content easily without having to send requests to the servers, play my sequences directly from my phone, build and save sequence lists, define the meta-data for each sequence within the list.
 
+
+To run the front-end :
+
+```
+cd web_interface && npm run dev # For development mode
+cd web_interface && npm run prod # For production mode
+```
 
 ## Next steps
 
