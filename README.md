@@ -56,6 +56,7 @@ The server exposes the following routes :
 To run the server :
 
 ```
+npm i
 npm run dev # For development mode
 npm run prod # For production mode
 ```
@@ -80,6 +81,7 @@ The server exposes the following routes using Flask :
 To run the server :
 
 ```
+pip3 install flask flask_cors _rpi_ws281x
 sudo python3 server.py
 ```
 
@@ -103,6 +105,7 @@ The front-end also allows me to convert any content easily without having to sen
 To run the front-end :
 
 ```
+npm i
 cd web_interface && npm run dev # For development mode
 cd web_interface && npm run prod # For production mode
 ```
