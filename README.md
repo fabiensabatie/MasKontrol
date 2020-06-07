@@ -2,9 +2,9 @@
  #### *One mask to control them  all.*
 
 The project is divided into three parts :
-- A Node.js / TypeScript server that allows to convert any type of content into *sequences*, and send them to the Python server.
-- The Python server that receives its orders from the Node.js server, reads the sequences and displays them on the LED strips of the mask.
-- The React front-end, that allows me to map the LED strips, and provides a user-friendly interface for creating sequences, sequence lists, handle sequences loops, manage the mask luminosity settings, and more.
+- **A Node.js / TypeScript server** that allows to convert any type of content into *sequences*, and send them to the Python server.
+- **The Python server** that receives its orders from the Node.js server, reads the sequences and displays them on the LED strips of the mask.
+- **The React front-end**, that allows me to map the LED strips, and provides a user-friendly interface for creating sequences, sequence lists, handle sequences loops, manage the mask luminosity settings, and more.
 
 ---------------------------------------------
 In order to make the mask fully wearable, I use a RaspberryPi 4 that emits its own WiFi newtork, runs both servers and exposes the React front-end so that the mask can be controlled from any device connected to the Pi.
