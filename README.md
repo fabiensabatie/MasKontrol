@@ -38,7 +38,7 @@ The server exposes the following routes :
 | POST | /sequences/download/:name | Downloads a sequence to the Raspberry Pi (in cases I converted in on another PC) | **name** (*string*)
 | POST | /videoConverter | Converts a file sent through the HTML form of the React front-end into the sequence format | The HTML files fields.
 | POST | /onlineConverter | Converts a file downloaded through an URL into the sequence format. | **url** (*string*), **name** (*string, optionnal*)
-| GET | /settings | Fetches the project settings (the LED map, Mask default brightness, playback speed, etc). | *url* (string), *name* (string, optionnal)
-| POST | /settings | Updates the settings | *server_url* (string), *pi_url* (string), *led_count* (number), *gpio* (number, deprecated), *maxBrightness* (string), *width* (number), *height* (number), *map* (Array\<number>), *guiBrightness* (number),  *guiContrast*  (number), *guiSaturation* (number)
-| GET | /thumbnails | Serves the sequences thumbnails for the front-end to display | *url* (string), *name* (string, optionnal)
+| GET | /settings | Fetches the project settings (the LED map, Mask default brightness, playback speed, etc). | **url** (*string*), **name** (*string, optionnal*)
+| POST | /settings | Updates the settings | **server_url** (*string*), **pi_url** (*string*), **led_count** (*number*), **gpio** (*number, deprecated*), **maxBrightness** (*string*), **width** (*number*), **height** (*number*), **map** (*Array\<number>*), **guiBrightness** (*number*),  **guiContrast**  (*number*), **guiSaturation** (*number*)
+| GET | /thumbnails | Serves the sequences thumbnails for the front-end to display | **url** (*string*), **name** (*string, optionnal*)
 
