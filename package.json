@@ -28,7 +28,11 @@
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "fluent-ffmpeg": "^2.1.2",
+        "ora": "^4.0.4",
+        "pngjs": "^5.0.0",
         "ts-node": "^8.10.2",
-        "typescript": "^3.9.5"
+        "typescript": "^3.9.5",
+        "ytdl-core": "^2.1.7"
     }
 }

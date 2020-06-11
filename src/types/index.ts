@@ -1,5 +1,5 @@
 import { Server } from './server';
-import { SequenceOptions } from './sequences';
 import { Mask } from './mask';
+import { Converter as ConverterTypes } from './converter';
 
-export { Server, SequenceOptions, Mask };
+export { Server, ConverterTypes, Mask };

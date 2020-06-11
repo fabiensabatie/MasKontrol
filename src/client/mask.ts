@@ -3,9 +3,9 @@ import Logger from '../services/utils/logger';
 import Axios, { AxiosResponse } from 'axios';
 
 export class MaskClient {
-	public converter_url: string = process.env.CONVERTER_URL;
 	public rpi_url: string = process.env.PI_URL;
 	public led_count: number = parseInt(process.env.LED_COUNT);
+	public map: Array<number> = [];
 	private _initialized: boolean = false;
 
 	private URLs = {
@@ -13,11 +13,11 @@ export class MaskClient {
 	};
 
 	constructor(options: Mask.Options) {
-		options.converter_url && (this.converter_url = options.converter_url);
 		options.rpi_url && (this.rpi_url = options.rpi_url);
 		options.led_count && (this.led_count = options.led_count);
+		options.map && (this.map = options.map);
 
-		if (!this.converter_url || !this.rpi_url)
+		if (!this.rpi_url)
 			throw new Error(
 				'The Mask client must be initialized with at least the converter and Raspberry Pi URLs.'
 			);
@@ -26,9 +26,6 @@ export class MaskClient {
 	}
 
 	update(options: Mask.Options) {
-		options.converter_url
-			? (this.converter_url = options.converter_url)
-			: Logger.warn('The converter url was unchanged');
 		options.rpi_url
 			? (this.rpi_url = options.rpi_url)
 			: Logger.warn('The Raspberry Pi url was unchanged');

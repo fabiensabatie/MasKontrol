@@ -1,6 +1,6 @@
 export namespace Mask {
 	export type Options = {
-		converter_url?: string;
+		map?: Array<number>;
 		rpi_url?: string;
 		led_count?: number;
 	};
