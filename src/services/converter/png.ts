@@ -13,9 +13,7 @@ export default async function toImage(
 	return new Promise(async (resolve, reject) => {
 		if (file.sources[0] !== '/') reject('Please provide an absolute path to the file');
 
-		Logger.info('Get or creating the folder : ' + file.destinationFolder);
 		await Folders.getOrCreate(file.destinationFolder);
-		Logger.info('Found the folder : ' + file.destinationFolder);
 
 		const outputOtions =
 			`-vf scale=${dimensions.width}:${dimensions.height}` +
