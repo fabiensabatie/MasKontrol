@@ -23,12 +23,11 @@ export default async function toImage(
 			color: 'green',
 			text: `Converting a file to ${file.destinationFormat.toUpperCase()} images.`,
 			spinner: 'bouncingBall',
-		});
+		}).start();
 
 		ffmpeg(file.sources)
 			.outputOption(outputOtions)
 			.output(`${file.destinationFolder}/%03d.${file.destinationFormat}`)
-			.on('start', () => spinner.start())
 			.on('progress', (progress: any) => {
 				const percentage = `${Math.ceil(progress.percent)}% done.`;
 				spinner.text = `Converting a file to ${file.destinationFormat.toUpperCase()} images : ${percentage}`;

@@ -16,8 +16,8 @@ const Logger = {
 	error: (message: any) => Logger.log(message, LEVELS.VERBOSE, 'red'),
 	log: (message: any, level: LEVELS = LEVELS.VERBOSE, color: string = 'white') => {
 		if (!message) return;
-		if (message instanceof Error) message = JSON.stringify(message, null, '\t');
-		else if (typeof message === 'object') message = JSON.stringify(message, null, '\t');
+		// if (message instanceof Error) message = JSON.stringify(message, null, '\t');
+		// else if (typeof message === 'object') message = JSON.stringify(message, null, '\t');
 
 		let datedMessage = `[ ${new Date().toDateString()} ] ` + message;
 		// @ts-ignore

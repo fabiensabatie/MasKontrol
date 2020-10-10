@@ -5,6 +5,7 @@ import Fs from 'fs';
 import { PNG } from 'pngjs';
 import { Folders } from '../utils/files';
 import Logger from '../utils/logger';
+import Youtube from './youtube';
 import Ora from 'ora';
 
 export class Sequence extends Converter {
@@ -28,13 +29,14 @@ export class Sequence extends Converter {
 		amountOfFrames.map((byte: number) => (this.__buffer[this.__buffer_index++] = byte));
 		this.__buffer[this.__buffer_index++] = this.Dimensions.width;
 		this.__buffer[this.__buffer_index++] = this.Dimensions.height;
+		Logger.success('Wrote the sequence header.');
 	}
 
 	async writeFrame(path: string) {
 		const _sequence = this;
 		if (path.indexOf('.png') < 0)
-			throw new Error(
-				`Sequences frames can only be created from PNG images : ${path} is not a valid PNG image.`
+			return Promise.reject(
+				`Sequences frames can only be created from PNG images : \n\t${path}\n is not a valid PNG image.`
 			);
 		return new Promise((resolve, reject) => {
 			try {
@@ -49,8 +51,8 @@ export class Sequence extends Converter {
 								_sequence.__buffer[_sequence.__buffer_index++] = this.data[binaryIndex + 2];
 							}
 						}
+						return resolve();
 					});
-				return resolve();
 			} catch (err) {
 				return reject(err);
 			}
@@ -60,7 +62,24 @@ export class Sequence extends Converter {
 	async writeBody(Files?: ConverterTypes.Files) {
 		Files = Files ? Files : this.Files;
 		if (!Array.isArray(this.Files.sources)) throw new Error('The sources must an array');
-		this.Files.sources.map(async (path: string) => await this.writeFrame(path));
+		const spinner = Ora({
+			color: 'green',
+			text: `Writing the body.`,
+			spinner: 'bouncingBall',
+		}).start();
+		try {
+			for (let i: number = 0; i < this.Files.sources.length; i++) {
+				spinner.text = `Writing the body : ${Math.ceil(
+					(i * 100) / this.Files.sources.length
+				)}% done.`;
+				await this.writeFrame(<string>this.Files.sources[i]);
+			}
+			spinner.stop();
+		} catch (err) {
+			spinner.stop();
+			throw new Error(err);
+		}
+
 		Logger.success('Successfully wrote the sequence body.');
 		await this.writeToFile(Files);
 	}
@@ -69,23 +88,51 @@ export class Sequence extends Converter {
 		Files = Files ? Files : this.Files;
 		await Folders.getOrCreate(Files.destinationFolder);
 		const destinationPath = `${Files.destinationFolder}/${this.name}.${Files.destinationFormat}`;
-		Fs.writeFileSync(destinationPath, this.__buffer);
-		Logger.success('Successfully wrote the buffer into a file : ' + destinationPath);
-		this.__results = destinationPath;
+		const spinner = Ora({
+			color: 'green',
+			text: `Writing the sequence to a file.`,
+			spinner: 'bouncingBall',
+		}).start();
+		try {
+			Fs.writeFileSync(destinationPath, this.__buffer);
+			spinner.stop();
+			Logger.success('Successfully wrote the buffer into a file : ' + destinationPath);
+			this.__results = destinationPath;
+			return this.__results;
+		} catch (err) {
+			spinner.stop();
+			throw new Error(err);
+		}
 	}
 
 	async convert() {
-		await this.Images({
+		if (this.Files.sources.indexOf('youtube.com') >= 0) {
+			this.Files.sources = await Youtube.download({
+				sources: this.Files.sources,
+				destinationFormat: 'mp4',
+				destinationFolder:
+					process.cwd() +
+					'/' +
+					(process.env.TMP_FOLDER || 'tmp') +
+					`/${(Math.random() * 100000).toFixed(0)}`,
+			});
+		}
+		this.Files.sources = await this.Images({
 			files: {
-				destinationFolder: process.cwd() + '/' + (process.env.TMP_FOLDER || 'tmp'),
+				destinationFolder:
+					process.cwd() +
+					'/' +
+					(process.env.TMP_FOLDER || 'tmp') +
+					`/${(Math.random() * 100000).toFixed(0)}`,
 				destinationFormat: 'png',
 				sources: this.Files.sources,
 			},
 		});
-		this.Files.sources = this.__results;
-		this.writeHeader();
-		this.writeBody({
-			destinationFolder: process.cwd() + '/' + (process.env.SEQUENCES_FOLDER || 'sequences'),
+		await this.writeHeader();
+		await this.writeBody({
+			destinationFolder:
+				this.Files.destinationFolder ||
+				process.cwd() + '/' + (process.env.SEQUENCES_FOLDER || 'sequences'),
 			destinationFormat: this.Files.destinationFormat,
 			sources: this.Files.sources,
 		});
@@ -93,18 +140,3 @@ export class Sequence extends Converter {
 	}
 }
 
-(async () => {
-	const Options = {
-		name: 'Bunny Rabbit',
-		Files: {
-			sources: '/Users/fabiensabatie/Movies/big_buck_bunny.mp4',
-			destinationFormat: 'seq',
-			destinationFolder: '/Users/fabiensabatie/Movies',
-		},
-		Dimensions: {
-			width: 43,
-			height: 26,
-		},
-	};
-	const sequence = new Sequence(Options).convert();
-})().catch(console.log);

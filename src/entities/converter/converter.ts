@@ -20,7 +20,7 @@ export class Converter {
 	}
 
 	Images = async (options: ConverterTypes.Parameters) => {
-		this.__results = await toPNG(
+		return await toPNG(
 			options.files || this.Files,
 			options.dimensions || this.Dimensions,
 			options.colorimetry || this.Colorimetry

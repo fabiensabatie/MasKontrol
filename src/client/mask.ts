@@ -1,5 +1,5 @@
-import { Mask, Server } from '../types';
-import Logger from '../services/utils/logger';
+import { Mask } from '../types';
+import Logger from '../entities/utils/logger';
 import Axios, { AxiosResponse } from 'axios';
 
 export class MaskClient {
@@ -44,7 +44,7 @@ export class MaskClient {
 			: Promise.reject(data.error || 'Unknow error on the Raspberry Pi');
 	}
 
-	request(url: string, method: Server.Methods, data: any, isInit: boolean = false) {
+	request(url: string, method: 'GET' | 'POST', data: any, isInit: boolean = false) {
 		if (!this._initialized && !isInit)
 			return Promise.reject('Please initialize the client first with the init() method.');
 		return Axios({ url, method, data }).then(this.handleResponse).catch(this.handleError);
@@ -57,18 +57,18 @@ export class MaskClient {
 	}
 
 	Sequences = {
-		play: (name: string) => {},
-		get: () => {},
-		upload: () => {},
+		play: (name: string) => { },
+		get: () => { },
+		upload: () => { },
 		Lists: {
-			get: () => {},
-			play: (name: string) => {},
-			save: () => {},
+			get: () => { },
+			play: (name: string) => { },
+			save: () => { },
 		},
 	};
 
 	Pixels = {
-		fill: (color: Mask.Color) => {},
+		fill: (color: Mask.Color) => { },
 	};
 
 	/* Boot up the Mask with a default sequence */
@@ -77,10 +77,10 @@ export class MaskClient {
 		process.env.BOOTUP_SEQUENCE
 			? this.Sequences.play(process.env.BOOTUP_SEQUENCE)
 			: Logger.warn(
-					'The Mask was initialized but no bootup sequence was played. Please define the BOOTUP_SEQUENCE environement variable'
-			  );
+				'The Mask was initialized but no bootup sequence was played. Please define the BOOTUP_SEQUENCE environement variable'
+			);
 	}
 
 	/* Shuts the mask down */
-	off() {}
+	off() { }
 }
