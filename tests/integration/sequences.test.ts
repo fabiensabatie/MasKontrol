@@ -17,6 +17,6 @@ describe('Sequences', () => {
         };
 
         const converted = await Convert(new Sequence(Options));
-        expect(true).toBe(true);
+        expect(converted).toBe("/Users/fabiensabatie/Movies/testing/wow/hehe/Trance.seq");
     })
 })

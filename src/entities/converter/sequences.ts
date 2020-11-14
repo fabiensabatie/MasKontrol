@@ -20,7 +20,7 @@ export class Sequence extends Converter {
 		/*
 			Buffer contains 8 bytes for the number of frames,
 			2 bytes for the width and the height (<255 each),
-			and RGG colors for each pixel
+			and RGB colors for each pixel
 		*/
 		this.__buffer = new Int8Array(
 			10 + this.Files.sources.length * this.Dimensions.width * this.Dimensions.height * 3
